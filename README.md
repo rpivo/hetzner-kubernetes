@@ -19,7 +19,9 @@ You can run several services in Kubernetes on Hetzner at the same price as a sin
 - **Argo CD**: GitOps continuous delivery tool making Kubernetes deployment delightful
 - **Prometheus**: metrics collection for monitoring
 - **Grafana**: visualization for monitoring
+- **Terraform**: industry standard for cloud-agnostic infra configuration
 - **Docker Hub**: one free-to-use private image repo is allowed per Docker account
+- **GitHub Workflows**: a delightful way to deploy Docker and Terraform resoures
 - **Bitnami Sealed Secrets**: an easy way to manage Kubernetes secrets in Argo CD
 
 ### The Opinionated Approach

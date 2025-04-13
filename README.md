@@ -83,6 +83,7 @@ Additionally a Kubernetes cluster is provisioned with:
 
 This guide assumes you have:
 
+- Terraform installed locally
 - a Hetzner account
 - a private Docker repo
 - an application that is ready to serve and will accept GET requests (and optionally has a domain name)
@@ -90,6 +91,10 @@ This guide assumes you have:
 <hr />
 
 ## Walkthrough
+
+### Create an API Token in Hetzner
+
+Create an API token in Hetzner with read-write permissions. You'll need the token shortly, so copy it. (And, of course, never commit it)
 
 ### Provision Cloud Resources with Kube-Hetzner
 
@@ -104,6 +109,8 @@ For a more thorough walkthrough of this step, you should follow their documentat
 This will pull a Terraform module that defines the cloud resources for Hetzner, and it has lots and lots of helpful comments. If this is your first time setting this up, I highly recommend pulling this file and reading through all of the comments.
 
 I've prepared a modified version of this file in this repo at **terraform/main.tf** with these modifications:
+
+-
 
 #### Retrieve the base packer file for the snapshots
 

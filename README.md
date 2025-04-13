@@ -101,6 +101,10 @@ For a more thorough walkthrough of this step, you should follow their documentat
 
 `curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/kube.tf.example -o kube.tf`
 
+This will pull a Terraform module that defines the cloud resources for Hetzner, and it has lots and lots of helpful comments. If this is your first time setting this up, I highly recommend pulling this file and reading through all of the comments.
+
+I've prepared a modified version of this file in this repo at **terraform/main.tf** with these modifications:
+
 #### Retrieve the base packer file for the snapshots
 
 `curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o hcloud-microos-snapshots.pkr.hcl`

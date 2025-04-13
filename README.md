@@ -10,7 +10,27 @@ Despite being convenient, the big cloud providers can be prohibitively expensive
 
 You can run several services in Kubernetes on Hetzner at the same price as a single service in AWS Fargate or EKS. Even a small app on Fargate or EKS can cost over $100 a month. By migrating to Kubernetes on Hetzner Cloud, you can reasonably save nearly a $1000 per year on that small app while still providing a highly available service.
 
-## Defining "High Availability"
+## How
+
+### The Stack
+
+- Hetzner Cloud: a cloud provider with great service, ease of use, and cost efficient servers. One of the most popular "low-cost" cloud provider on the market.
+- k3s (via kube-hetzner): a lightweight Kubernetes distribution that requires less hardware resources and allows you to run a fully functional Kubernetes cluster on a single node (not what we're doing here, but still interesting)
+- Argo CD: GitOps continuous delivery tool making Kubernetes deployment delightful
+- Prometheus: metrics collection for monitoring
+- Grafana: visualization for monitoring
+- Bitnami Sealed Secrets: an easy way to manage Kubernetes secrets in Argo CD
+
+### The Opinionated Approach
+
+In setting up this opinionated approach, I optimized for:
+
+- cost efficiency
+- high availability
+
+In doing so, tradeoffs inevitably need to be made.
+
+## Defining High Availability
 
 Claude (Anthropic) defines High Availability for Kubernetes like this:
 
@@ -20,7 +40,7 @@ Claude (Anthropic) defines High Availability for Kubernetes like this:
 > - Distributed state storage (usually via etcd clusters)
 > - Worker node redundancy for hosting application workloads
 > - Load balancing capabilities for both internal cluster components and external traffic
-
+>
 > The goal is to ensure that the system can continue to operate without significant service disruption even when components fail, scheduled maintenance occurs, or during unexpected peak loads.
 
 <hr />

@@ -90,3 +90,17 @@ This guide assumes you have:
 <hr />
 
 ## Walkthrough
+
+### Provision Cloud Resources with Kube-Hetzner
+
+[Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
+
+For a more thorough walkthrough of this step, you should follow their documentation. Here is a simplified walkthrough that has worked for me:
+
+#### Retrieve the base Terraform file
+
+`curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/kube.tf.example -o kube.tf`
+
+#### Retrieve the base packer file for the snapshots
+
+`curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o hcloud-microos-snapshots.pkr.hcl`

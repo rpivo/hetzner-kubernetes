@@ -118,11 +118,13 @@ Create an API token in Hetzner with read-write permissions. You'll need the toke
 
 ### 3. Create a terraform directory
 
-This makes it easier to deploy Terraform resources.
+We'll put our Terraform files in here.
 
 ```sh
 mkdir terraform
 ```
+
+Below, I've outlined deploying the Hetzner resources in either of 2 ways: locally or through a GitHub workflow. The GitHub workflow approach is preferred and more repeatable, but is more complicated. If you want to get through this quickly, go with the first approach.
 
 ### 4a. Create a terraform.tfvars file that contains your hcloud token
 

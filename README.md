@@ -92,6 +92,26 @@ This guide assumes you have:
 
 ## Walkthrough
 
+I'm writing this walkthrough as if you're working in a new repo, but this can be done in a "brown field" repo as well.
+
+### Create a .gitignore file to avoid checking in sensitive information
+
+Here's an example gitignore to avoid checking in some of the files that we'll be working with throughout this walkthrough. This gitignore is also available in this repo.
+
+```
+.env
+.env*.local
+.terraform
+.terraform.lock.hcl
+*.key
+*.key.pub
+*.tfstate
+*.tfstate.*
+*.tfvars
+kubeconfig.yaml
+secrets/
+```
+
 ### Create an API Token in Hetzner
 
 Create an API token in Hetzner with read-write permissions. You'll need the token shortly, so copy it. (And, of course, never commit it)

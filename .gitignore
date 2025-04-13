@@ -1,0 +1,11 @@
+.env
+.env*.local
+.terraform
+.terraform.lock.hcl
+*.key
+*.key.pub
+*.tfstate
+*.tfstate.*
+*.tfvars
+kubeconfig.yaml
+secrets/

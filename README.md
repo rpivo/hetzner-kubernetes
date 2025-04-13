@@ -3,6 +3,7 @@
 - [What?](#what)
 - [Why?](#why)
 - [How?](#how)
+- [Prerequisites](#prerequisites)
 - [Walkthrough](#walkthrough)
 
 ## What?
@@ -80,6 +81,14 @@ Additionally a Kubernetes cluster is provisioned with:
 - Argo CD setup
 - Prometheus setup, tracking a single metric just to validate it's working (with docs on scaling up)
 - Grafana setup
+
+## Prerequisites
+
+This guide assumes you have:
+
+- a Hetzner account
+- a private Docker repo
+- an application that is ready to serve and will accept GET requests (and optionally has a domain name)
 
 <hr />
 

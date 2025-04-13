@@ -121,14 +121,30 @@ Create an API token in Hetzner with read-write permissions. You'll need the toke
 We'll put our Terraform files in here.
 
 ```sh
-mkdir terraform
+mkdir -p terraform/k3s
 ```
+
+### 4. Retrieve the base kube-hetzner Terraform file.
+
+[Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
+
+For a more thorough walkthrough of this step, you should follow their documentation. Here is a simplified walkthrough that has worked for me.
+
+Retrieve the kube-hetzner Terraform file and put it in your terraform/k3s directory:
+
+`curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/kube.tf.example -o terraform/k3s/main.tf`
+
+This will pull a Terraform module that defines the cloud resources for Hetzner, and it has lots and lots of helpful comments. If this is your first time setting this up, I highly recommend pulling this file and reading through all of the comments.
+
+I've prepared a modified version of this file in this repo at **terraform/main.tf** with these modifications:
+
+-
 
 Below, I've outlined deploying the Hetzner resources in either of 2 ways: locally or through a GitHub workflow. The GitHub workflow approach is preferred and more repeatable, but is more complicated. If you want to get through this quickly, go with the first approach.
 
 <hr />
 
-## Terraform Deployment: Option 1 - Deploy Locally
+#### Terraform Deployment: Option 1 - Deploy Locally
 
 ### 4a. Create a terraform.tfvars file that contains your hcloud token
 
@@ -144,25 +160,9 @@ hcloud_token = {{ your hetzner api token }}
 
 <hr />
 
-## Terraform Deployment: Option 2 - Deploy with a GitHub Workflow
+#### Terraform Deployment: Option 2 - Deploy with a GitHub Workflow
 
 <hr />
-
-### Provision Cloud Resources with Kube-Hetzner
-
-[Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
-
-For a more thorough walkthrough of this step, you should follow their documentation. Here is a simplified walkthrough that has worked for me:
-
-#### Retrieve the base Terraform file
-
-`curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/kube.tf.example -o kube.tf`
-
-This will pull a Terraform module that defines the cloud resources for Hetzner, and it has lots and lots of helpful comments. If this is your first time setting this up, I highly recommend pulling this file and reading through all of the comments.
-
-I've prepared a modified version of this file in this repo at **terraform/main.tf** with these modifications:
-
--
 
 #### Retrieve the base packer file for the snapshots
 

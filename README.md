@@ -3,6 +3,7 @@
 - [What?](#what)
 - [Why?](#why)
 - [How?](#how)
+- [Walkthrough](#walkthrough)
 
 ## What?
 
@@ -63,11 +64,7 @@ That being said, you may not want to do things exactly as I've done them here. T
 - **GitHub Workflows**: a delightful way to deploy Docker and Terraform resoures
 - **Bitnami Sealed Secrets**: an easy way to manage Kubernetes secrets in Argo CD
 
-<hr />
-
-## Hetzner Infrastructure
-
-Deploying this infrastructure will provision these resources in Hetzner:
+This stack deploys these hardware resources in Hetzner:
 
 - 5 servers (3 control plane nodes, 2 worker nodes)
 - 1 load balancer
@@ -75,3 +72,15 @@ Deploying this infrastructure will provision these resources in Hetzner:
 - 1 firewall
 - 1 network
 - 2 snapshots
+
+Additionally a Kubernetes cluster is provisioned with:
+
+- 3 control plane nodes
+- 2 worker nodes
+- Argo CD setup
+- Prometheus setup, tracking a single metric just to validate it's working (with docs on scaling up)
+- Grafana setup
+
+<hr />
+
+## Walkthrough

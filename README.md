@@ -35,11 +35,6 @@ Claude (Anthropic) defines High Availability for Kubernetes like this:
 
 > Three etcd nodes is generally sufficient for smaller clusters and five etcd nodes for large clusters.
 
-Focusing on this definition, I've set up this guide to create a Kubernetes cluster with:
-
-- 3 control plane nodes. This is the minimum number of control plane nodes that allow for a quorum
-- 2 worker nodes. While arguably risky for mission-critical production workloads, this passes as "highly available". If one node goes down, the other node will have your services still available, and Kubernetes will self-heal.
-
 ### The Opinionated Approach
 
 In setting up this opinionated approach, I optimized for:
@@ -47,7 +42,12 @@ In setting up this opinionated approach, I optimized for:
 - cost efficiency
 - high availability
 
-In doing so, tradeoffs inevitably need to be made. After having tried many things, I've found this particular stack to be relatively easy to set up while also being reliable, well-maintained, and fun to use.
+Focusing on the definition of High Availability above, I've set up this guide to create a Kubernetes cluster with:
+
+- 3 control plane nodes. This is the minimum number of control plane nodes that allow for a quorum
+- 2 worker nodes. While arguably risky for mission-critical production workloads, this passes as "highly available". If one node goes down, the other node will have your services still available, and Kubernetes will self-heal.
+
+Tradeoffs inevitably needed to be made to curate this stack. After having tried many things, I've found this particular stack to be relatively easy to set up while also being reliable, well-maintained, and fun to use.
 
 That being said, you may not want to do things exactly as I've done them here. This setup is pretty modular -- feel free to leave out parts or swap things out for other things that you like!
 

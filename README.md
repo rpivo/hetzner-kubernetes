@@ -126,6 +126,10 @@ mkdir terraform
 
 Below, I've outlined deploying the Hetzner resources in either of 2 ways: locally or through a GitHub workflow. The GitHub workflow approach is preferred and more repeatable, but is more complicated. If you want to get through this quickly, go with the first approach.
 
+<hr />
+
+## Terraform Deployment: Option 1 - Deploy Locally
+
 ### 4a. Create a terraform.tfvars file that contains your hcloud token
 
 ```sh
@@ -137,6 +141,12 @@ Add your Hetzner API token in there as `hcloud_token`:
 ```
 hcloud_token = {{ your hetzner api token }}
 ```
+
+<hr />
+
+## Terraform Deployment: Option 2 - Deploy with a GitHub Workflow
+
+<hr />
 
 ### Provision Cloud Resources with Kube-Hetzner
 

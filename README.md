@@ -1,14 +1,11 @@
 # hetzner-kubernetes
 
-- [What?](#what)
+An opinionated setup for Kubernetes (k3s), Argo CD, Prometheus, & Grafana on Hetzner Cloud.
+
 - [Why?](#why)
 - [How?](#how)
 - [Prerequisites](#prerequisites)
 - [Walkthrough](#walkthrough)
-
-## What?
-
-An opinionated setup for Kubernetes (k3s), Argo CD, Prometheus, & Grafana on Hetzner Cloud.
 
 ## Why?
 

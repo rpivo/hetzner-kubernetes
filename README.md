@@ -148,7 +148,7 @@ module "kube-hetzner" {
   ssh_public_key = file("./hetzner_ssh.key.pub")
   # Read the SSH private key from a file for node access
   ssh_private_key = file("./hetzner_ssh.key")
-  # Set the network region for the cluster from one of: eu-central,	us-east,	us-west,	ap-southeast
+  # Set the network region for the cluster from one of: eu-central, us-east, us-west, ap-southeast
   network_region = "us-east"
 
   # Define the control plane nodes (master nodes that run the Kubernetes control plane)
@@ -159,7 +159,7 @@ module "kube-hetzner" {
       # Server type/size to use (cpx11 is currently the cheapest server type: 2 vCPUs, 4GB RAM)
       server_type = "cpx11",
       # Datacenter location. Choices:
-      # DE Falkenstein fsn1,	US Ashburn, VA ash,	US Hillsboro, OR hil,	SG Singapore sin, DE Nuremberg nbg1, FI Helsinki hel1
+      # DE Falkenstein fsn1, US Ashburn, VA ash, US Hillsboro, OR hil, SG Singapore sin, DE Nuremberg nbg1, FI Helsinki hel1
       location    = "ash",
       # No custom Kubernetes labels for these nodes
       labels      = [],
@@ -248,7 +248,9 @@ variable "hcloud_token" {
 }
 ```
 
-[Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
+If you want a version of this file without comments, copy the contents of the file at terraform/k3s/main.tf in this repo.
+
+This Terraform module has been adapted from the Kube-Hetzner project. [Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
 
 For a more thorough walkthrough of this step, you should follow their documentation. Here is a simplified walkthrough that has worked for me.
 

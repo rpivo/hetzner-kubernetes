@@ -263,34 +263,25 @@ This will pull a Terraform module that defines the cloud resources for Hetzner, 
 
 ### 5. Retrieve the Packer file for the OpenSUSE MicroOS Server snapshots
 
+Packer is an open-source tool for creating identical machine images across multiple platforms from a single configuration.
+
 kube-hetzner provides snapshots for your servers to use.
 
 ```sh
 curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o terraform/k3s/hcloud-microos-snapshots.pkr.hcl
 ```
 
--
-
-Below, I've outlined how to deploy the Hetzner resources in either of 2 ways: locally or through a GitHub workflow. The GitHub workflow approach is preferred and more repeatable, but is more complicated. If you want to get through this quickly, go with the first approach.
-
-<hr />
-
-#### Terraform Deployment: Option 1 - Deploy Locally
-
-### 4a. Create a terraform.tfvars file that contains your hcloud token
+### 6. Add HCLOUD_TOKEN to your system's environment variables
 
 ```sh
-touch terraform/terraform.tfvars
+export HCLOUD_TOKEN="your_hcloud_token"
 ```
 
-Add your Hetzner API token in there as `hcloud_token`:
+### 7. Initialize Packer for the Server Snapshots
 
+```sh
+packer init hcloud-microos-snapshots.pkr.hcl
 ```
-hcloud_token = {{ your hetzner api token }}
-```
 
-<hr />
-
-#### Terraform Deployment: Option 2 - Deploy with a GitHub Workflow
-
-<hr />
+This reads the configuration file (hcloud-microos-snapshots.pkr.hcl), downloads and installs any required Packer plugins specified in that configuration, and
+prepares your environment for building images.

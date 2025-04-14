@@ -133,75 +133,117 @@ touch terraform/k3s/main.tf
 Add this content:
 
 ```tf
+# Define a module named "kube-hetzner" which sets up a Kubernetes cluster on Hetzner Cloud
 module "kube-hetzner" {
+  # Specify which provider this module should use
   providers = {
     hcloud = hcloud
   }
 
+  # Pass the Hetzner Cloud API token from a variable for authentication
   hcloud_token = var.hcloud_token
+  # Specify the source of the module (from Terraform Registry)
   source = "kube-hetzner/kube-hetzner/hcloud"
+  # Read the SSH public key from a file for node access
   ssh_public_key = file("./hetzner_ssh.key.pub")
+  # Read the SSH private key from a file for node access
   ssh_private_key = file("./hetzner_ssh.key")
+  # Set the network region for the cluster from one of: eu-central,	us-east,	us-west,	ap-southeast
   network_region = "us-east"
 
+  # Define the control plane nodes (master nodes that run the Kubernetes control plane)
   control_plane_nodepools = [
     {
+      # Name for this group of control plane nodes
       name        = "control-plane",
+      # Server type/size to use (cpx11 is currently the cheapest server type: 2 vCPUs, 4GB RAM)
       server_type = "cpx11",
+      # Datacenter location. Choices:
+      # DE Falkenstein fsn1,	US Ashburn, VA ash,	US Hillsboro, OR hil,	SG Singapore sin, DE Nuremberg nbg1, FI Helsinki hel1
       location    = "ash",
+      # No custom Kubernetes labels for these nodes
       labels      = [],
+      # Add a taint to prefer workloads not schedule on control plane nodes
       taints      = ["node-role.kubernetes.io/control-plane=:PreferNoSchedule"],
+      # Create 3 control plane nodes for high availability
       count       = 3
     }
   ]
 
+  # Define the worker nodes (agent nodes that run application workloads)
   agent_nodepools = [
     {
+      # Name for this group of worker nodes
       name        = "agent",
+      # Same server type as control plane nodes
       server_type = "cpx11",
+      # Same location as control plane nodes
       location    = "ash",
+      # No custom Kubernetes labels for these nodes
       labels      = [],
+      # No taints, so pods can be scheduled freely
       taints      = [],
+      # Create 2 worker nodes
       count       = 2
     }
   ]
 
+  # Specify the load balancer type for ingress traffic
+  # "lb11" is currently the smallest, cheapest load balancer
   load_balancer_type     = "lb11"
+  # Set the load balancer in same location as nodes
   load_balancer_location = "ash"
+  # Drain nodes safely during system upgrades to prevent workload disruption
   system_upgrade_use_drain = true
 
+  # Define DNS servers for cluster to use
   dns_servers = [
     "1.1.1.1",
     "8.8.8.8",
     "2606:4700:4700::1111",
   ]
 
+  # Don't automatically create a kubeconfig file
   create_kubeconfig = false
+  # Don't create Kustomization resources
   create_kustomization = false
 }
 
+# Configure the Hetzner Cloud provider
 provider "hcloud" {
+  # Use the Hetzner Cloud API token from a variable
   token = var.hcloud_token
 }
 
+# Specify Terraform and provider version requirements
 terraform {
+  # Require Terraform version 1.5.0 or newer. Change this to newer versions as need be.
   required_version = ">= 1.5.0"
 
+  # Define required providers with version constraints
   required_providers {
     hcloud = {
+      # Source of the Hetzner Cloud provider
       source  = "hetznercloud/hcloud"
+      # Require version 1.49.1 or newer of the provider.  Change this to newer versions as need be.
       version = ">= 1.49.1"
     }
   }
 }
 
+# Define an output to access the kubeconfig after applying
 output "kubeconfig" {
+  # Get the kubeconfig from the module output
   value     = module.kube-hetzner.kubeconfig
+  # Mark as sensitive to prevent showing in logs (contains credentials)
   sensitive = true
 }
 
+# Define the Hetzner Cloud API token variable
 variable "hcloud_token" {
+  # Mark as sensitive to prevent showing in logs
   sensitive = true
+  # Default to empty string (should be provided externally)
   default   = ""
 }
 ```

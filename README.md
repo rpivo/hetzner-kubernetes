@@ -285,3 +285,11 @@ packer init hcloud-microos-snapshots.pkr.hcl
 
 This reads the configuration file (hcloud-microos-snapshots.pkr.hcl), downloads and installs any required Packer plugins specified in that configuration, and
 prepares your environment for building images.
+
+### 8. Build the Server Snapshots
+
+```sh
+packer build hcloud-microos-snapshots.pkr.hcl
+```
+
+This creates customized openSUSE MicroOS images in your Hetzner Cloud account.

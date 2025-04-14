@@ -105,6 +105,7 @@ Here's an example gitignore to avoid checking in some of the files that we'll be
 .terraform.lock.hcl
 *.key
 *.key.pub
+*.pkr.hcl
 *.tfstate
 *.tfstate.*
 *.tfvars
@@ -250,7 +251,7 @@ variable "hcloud_token" {
 
 If you want a version of this file without comments, copy the contents of the file at terraform/k3s/main.tf in this repo.
 
-This Terraform module has been adapted from the Kube-Hetzner project. [Kube-Hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
+This Terraform module has been adapted from the kube-hetzner project. [kube-hetzner](https://github.com/kube-hetzner/terraform-hcloud-kube-hetzner) provides a way to easily bootstrap hardware resources and k3s (a lightweight Kubernetes Provider) on Hetzner.
 
 For a more thorough walkthrough of this step, you should follow their documentation. Here is a simplified walkthrough that has worked for me.
 
@@ -260,11 +261,17 @@ Retrieve the kube-hetzner Terraform file and put it in your terraform/k3s direct
 
 This will pull a Terraform module that defines the cloud resources for Hetzner, and it has lots and lots of helpful comments. If this is your first time setting this up, I highly recommend pulling this file and reading through all of the comments.
 
-I've prepared a modified version of this file in this repo at **terraform/main.tf** with these modifications:
+### 5. Retrieve the Packer file for the OpenSUSE MicroOS Server snapshots
+
+kube-hetzner provides snapshots for your servers to use.
+
+```sh
+curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o terraform/k3s/hcloud-microos-snapshots.pkr.hcl
+```
 
 -
 
-Below, I've outlined deploying the Hetzner resources in either of 2 ways: locally or through a GitHub workflow. The GitHub workflow approach is preferred and more repeatable, but is more complicated. If you want to get through this quickly, go with the first approach.
+Below, I've outlined how to deploy the Hetzner resources in either of 2 ways: locally or through a GitHub workflow. The GitHub workflow approach is preferred and more repeatable, but is more complicated. If you want to get through this quickly, go with the first approach.
 
 <hr />
 
@@ -287,7 +294,3 @@ hcloud_token = {{ your hetzner api token }}
 #### Terraform Deployment: Option 2 - Deploy with a GitHub Workflow
 
 <hr />
-
-#### Retrieve the base packer file for the snapshots
-
-`curl -sL https://raw.githubusercontent.com/kube-hetzner/terraform-hcloud-kube-hetzner/master/packer-template/hcloud-microos-snapshots.pkr.hcl -o hcloud-microos-snapshots.pkr.hcl`

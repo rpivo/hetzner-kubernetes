@@ -4,6 +4,7 @@
 .terraform.lock.hcl
 *.key
 *.key.pub
+*.pkr.hcl
 *.tfstate
 *.tfstate.*
 *.tfvars
